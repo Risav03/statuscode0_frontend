@@ -1,5 +1,6 @@
 import './globals.css'
 import { Montserrat } from 'next/font/google'
+import Rainbow from '@RainbowKit/Rainbow'
 
 const montserrat = Montserrat({ subsets: ['latin'] })
 
