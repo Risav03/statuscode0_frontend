@@ -10,7 +10,7 @@ import Landing from "@components/Landing";
 export default function Home() {
   return (
     <>
-      <div className="absolute top-0 left-0 w-screen h-screen flex flex-col items-center justify-center gap-4 z-[-9999]">
+      <div className="fixed top-0 left-0 w-screen h-screen flex flex-col items-center justify-center gap-4 z-[-9999]">
         <Image
           src={bg}
           alt="bg"

@@ -15,7 +15,7 @@ const Navbar = ({type}) => {
           {!(type==="mkt") && <h3 className="hover:text-blue-dark cursor-pointer">About Us</h3>}
           {!(type==="mkt") &&<h3 className="hover:text-blue-dark cursor-pointer">Train Model</h3>}
           {!(type==="mkt") &&<Link href="/marketplace" className="hover:text-blue-dark cursor-pointer">Data Market</Link>}
-          {!(type==="mkt") &&<h3 className="hover:text-blue-dark cursor-pointer">Contribute Data</h3>}
+          {!(type==="mkt") &&<Link href="/upload" className="hover:text-blue-dark cursor-pointer">Contribute Data</Link>}
           <h3 className="px-4 py-2 cursor-pointer hover:bg-blue-dark rounded-full bg-blue-mid text-white font-bold">Connect Wallet</h3>
         </div>
       </div>
