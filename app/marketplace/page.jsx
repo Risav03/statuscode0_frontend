@@ -123,7 +123,7 @@ const Marketplace = () => {
               ))}  
               </div>
               <div className="flex flex-row items-center justify-center gap-5">
-              <h2>Total data items: <span className="text-white"> {"1285"}  </span></h2>
+              <h2>Total data items: <span className="text-white"> {filterObjectsByTags().length} / {dataArray.length}  </span></h2>
               <button onClick={()=>{
                 handleDataBasket()
             }} className="px-4 text-base h-12 bg-blue-mid hover:bg-blue-dark rounded-lg font-semibold text-white">Add Data to Basket</button>
@@ -136,7 +136,7 @@ const Marketplace = () => {
             
             <div className="flex flex-row flex-wrap gap-4">
             {filterObjectsByTags()?.map((data, index)=>(
-              <div key={data?.id} className="border-blue-mid border-[1px] rounded p-3">
+              <div key={data?.id} className="border-blue-mid border-[1px] rounded p-3 w-48">
                 {/* <h2 className="text-blue-light font-semibold text-center text-lg mb-5 ">{data?.image}</h2> */}
                 <div className="w-full rounded h-32 bg-blue-mid/40 mb-2 "></div>
                 <h2 className="text-blue-mid font-semibold text-lg ">{data?.title}</h2>

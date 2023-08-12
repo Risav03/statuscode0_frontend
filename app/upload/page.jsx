@@ -8,6 +8,64 @@ import { RxCross2 } from "react-icons/rx";
 const Upload = () => {
   const [newTag, setNewTag] = useState();
   const [tags, setTags] = useState([]);
+  const [image, setImage] = useState(null);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [error, setError] = useState("");
+
+  const formikRef = useRef(null);
+
+  const handleUpload = async (e) => {
+    e.preventDefault();
+    if(name===""){
+      setError("Name is required");
+      return;
+    }
+    if(description===""){
+      setError("Description is required");
+      return;
+    }
+    if(image===null){
+      setError("Image is required");
+      return;
+    }
+    if(tags.length===0){
+      setError("Tags are required");
+      return;
+    }
+
+    const uploadData = {
+      name,
+      description,
+      image,
+      tags
+    }
+
+    console.log("Data Uploaded: ", uploadData);
+  }
+
+  function handleFileInputChange(event) {
+
+    const file = event.target.files[0];
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+
+      const base64String = reader.result.split(",")[1].trim();
+      console.log(base64String);
+
+      // formik field update
+      if (formikRef.current) {
+        formikRef.current.setFieldValue('file', base64String);
+      }
+      setFileReady(true);
+    };
+    reader.onerror = () => {
+      console.error('Error occurred while reading the file.');
+    };
+  }
+
   return (
     <>
       <Navbar type={"mkt"} />
@@ -33,7 +91,7 @@ const Upload = () => {
                 <h2 className="mt-2 mb-4 text-blue-dark font-semibold text-xl">
                   Upload an image
                 </h2>
-                <div className="w-full flex items-center justify-start placeholder:text-blue-light/30 mb-5 outline-none focus:outline outline-blue-mid outline-[1px] px-5 text-blue-light text-base focus:bg-blue-mid/10 h-12 rounded-lg border-blue-mid bg-black/20">
+                {/* <div className="w-full flex items-center justify-start placeholder:text-blue-light/30 mb-5 outline-none focus:outline outline-blue-mid outline-[1px] px-5 text-blue-light text-base focus:bg-blue-mid/10 h-12 rounded-lg border-blue-mid bg-black/20">
                   <input
                     type="file"
                     name="image_file"
@@ -41,7 +99,64 @@ const Upload = () => {
                     multiple
                     className=""
                   />
-                </div>
+                </div> */}
+                <div className="flex items-center justify-center w-full">
+                {image ? (
+                  <div className="relative w-full h-80">
+                    <img
+                      className="w-full h-full object-cover rounded-xl"
+                      src={URL.createObjectURL(image)}
+                      alt="Image"
+                    />
+                    <button
+                      className="absolute top-2 right-2 w-6 h-6 bg-blue-mid rounded-full flex items-center justify-center"
+                      onClick={() => setImage(null)}
+                    >
+                      <RxCross2 className="w-4 h-4 text-blue-mid" />
+                    </button>
+                  </div>
+                ) : (
+                  <label
+                    htmlFor="dropzone-file"
+                    className="flex flex-col items-center justify-center w-full border-2 border-blue-mid border-dashed rounded-lg cursor-pointer bg-blue-mid/10 hover:bg-blue-dark/30"
+                  >
+                    <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                      <svg
+                        className="w-10 h-10 mb-3 text-blue-light"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                        ></path>
+                      </svg>
+                      <p className="mb-2 text-sm text-blue-mid">
+                        <span className="font-semibold">Click to upload</span>{" "}
+                        or drag and drop
+                      </p>
+                      <p className="text-xs text-blue-light">
+                        SVG, PNG, JPG or Webp
+                      </p>
+                    </div>
+                    <input
+                      onChange={(e) => {
+                        if (e.target.files) {
+                          setImage(e.target.files[0]);
+                        }
+                      }}
+                      id="dropzone-file"
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                    />
+                  </label>
+                )}
+              </div>
               </div>
 
               <div>
@@ -51,6 +166,10 @@ const Upload = () => {
                 <input
                   placeholder="Name your Data..."
                   type=""
+                  value={name}
+                  onChange={(e)=>{
+                    setName(e.target.value)
+                  }}
                   className="w-full flex items-center justify-start placeholder:text-blue-light/30 mb-5 outline-none focus:outline outline-blue-mid outline-[1px] px-5 text-blue-light text-base focus:bg-blue-mid/10 h-12 rounded-lg border-blue-mid bg-black/20"
                 />
               </div>
@@ -64,6 +183,10 @@ const Upload = () => {
                   style={{ resize: "none" }}
                   rows="8"
                   type="textarea"
+                  value={description}
+                  onChange={(e)=>{
+                    setDescription(e.target.value)
+                  }}
                   className="w-full flex items-center justify-start placeholder:text-blue-light/30 mb-5 outline-none focus:outline outline-blue-mid outline-[1px] px-5 text-blue-light text-base focus:bg-blue-mid/10 pt-5 rounded-lg border-blue-mid bg-black/20"
                   name="description"
                 />
@@ -130,8 +253,13 @@ const Upload = () => {
                 </div>
               </div>
 
-              <button className="bg-blue-mid hover:bg-blue-dark py-2 px-4 text-white font-semibold rounded-full text-xl">
-                <input type="submit" value="Upload" />
+              {error && <h2 className="mt-2 mb-4 text-red-500 text-base">
+            {error}
+          </h2>}
+
+
+              <button type="button" onClick={handleUpload} className="bg-blue-mid hover:bg-blue-dark py-2 px-4 text-white font-semibold rounded-full text-xl">
+                Upload
               </button>
             </form>
           </div>
