@@ -40,7 +40,7 @@ function Button(){
                       <button
                         onClick={openConnectModal}
                         type="button"
-                        className="bg-blue-mid  hover:bg-blue-dark text-white px-4 py-2 rounded-xl font-Montserrat font-semibold col-span-1 shadow-lg shadow-blue-300/40 hover:-translate-y-1 duration-200"
+                        className="bg-blue-mid  hover:bg-blue-dark text-white px-4 py-2 rounded-full font-Montserrat font-semibold col-span-1 shadow-lg shadow-blue-300/40 hover:-translate-y-1 duration-200"
                       >
                         Connect Wallet
                       </button>
@@ -52,7 +52,7 @@ function Button(){
                       <button
                         onClick={openChainModal}
                         type="button"
-                        className="bg-red-500  hover:bg-red-700 text-white px-4 py-2 rounded-xl font-Montserrat font-semibold col-span-1 shadow-lg shadow-red-300/40 hover:-translate-y-1 duration-200"
+                        className="bg-red-500  hover:bg-red-700 text-white px-4 py-2 rounded-full font-Montserrat font-semibold col-span-1 shadow-lg shadow-red-300/40 hover:-translate-y-1 duration-200"
                       >
                         Wrong network
                       </button>
@@ -65,14 +65,14 @@ function Button(){
                         onClick={openChainModal}
                         style={{ display: "flex", alignItems: "center" }}
                         type="button"
-                        className="bg-purple-700 p-3 rounded-2xl shadow-lg shadow-purple-500/60 hover:-translate-y-1 duration-300 font-Montserrat  font-semibold "
+                        className=""
                       >
                         {chain.hasIcon && (
                           <div
                             style={{
                               background: chain.iconBackground,
-                              width: 12,
-                              height: 12,
+                              width: 40,
+                              height: 40,
                               borderRadius: 999,
                               overflow: "hidden",
                               marginRight: 4,
@@ -82,18 +82,18 @@ function Button(){
                               <img
                                 alt={chain.name ?? "Chain icon"}
                                 src={chain.iconUrl}
-                                style={{ width: 12, height: 12 }}
+                                style={{ width: 40, height: 40 }}
                               />
                             )}
                           </div>
                         )}
-                        {chain.name}
+                        {/* {chain.name} */}
                       </button>
 
                       <button
                         onClick={openAccountModal}
                         type="button"
-                        className="bg-green-500 p-3 rounded-2xl  shadow-lg shadow-green-500/60 hover:-translate-y-1 duration-300 font-Montserrat  font-semibold"
+                        className="bg-purple-700 p-3 py-2 rounded-full  shadow-lg shadow-purple-500/30 hover:-translate-y-1 duration-300 font-Montserrat  font-semibold"
                       >
                         {account.displayName}
                         {account.displayBalance
