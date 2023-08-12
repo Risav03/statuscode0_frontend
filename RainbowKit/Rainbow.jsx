@@ -1,20 +1,21 @@
-"use client";
+"use client"
 
-import "@rainbow-me/rainbowkit/styles.css";
-import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
-import { configureChains, createClient, WagmiConfig } from "wagmi";
-import { polygon, polygonMumbai } from "wagmi/chains";
-import { alchemyProvider } from "wagmi/providers/alchemy";
-import { publicProvider } from "wagmi/providers/public";
+import '@rainbow-me/rainbowkit/styles.css';
+import {
+  getDefaultWallets,
+  RainbowKitProvider,
+} from '@rainbow-me/rainbowkit';
+import { configureChains, createClient, WagmiConfig } from 'wagmi';
+import {polygon, polygonMumbai} from 'wagmi/chains';
+import { alchemyProvider } from 'wagmi/providers/alchemy';
+import { publicProvider } from 'wagmi/providers/public';
 
-const { chains, provider } = configureChains(
-  [polygon, polygonMumbai],
-  [publicProvider()]
-);
+
+
+const { chains, provider } = configureChains([polygon, polygonMumbai], [publicProvider()]);
 
 const { connectors } = getDefaultWallets({
   appName: "beastverse",
-  projectId: "5d10af3027c340310f3a3da64cbcedac",
   chains,
 });
 
