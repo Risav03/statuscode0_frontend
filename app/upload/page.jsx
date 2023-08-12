@@ -30,7 +30,7 @@ const Upload = () => {
     return gb;
   };
 
-  const url = "http://172.23.62.129:3000"
+   
 
   //axios call and after ipfs response do mint
 
