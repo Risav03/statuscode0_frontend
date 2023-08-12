@@ -2,7 +2,7 @@
 import Image from "next/image";
 import bg from "@assets/background.png";
 import Navbar from "@components/Navbar";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import Web3 from "web3";
 import axios from "axios";
@@ -19,9 +19,6 @@ const Upload = () => {
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
   const [hash, setHash] = useState("");
-
-
-  const formikRef = useRef(null);
 
   const getGasPrice = async () => {
     let gb = await web3.eth.getGasPrice().then();
@@ -554,8 +551,13 @@ const Upload = () => {
     
   }
 
+  const [imageStr, setImageStr ] = useState(null);
+
   const handleUpload = async (e) => {
     e.preventDefault();
+
+    handleFileInputChange()
+
     if(name===""){
       setError("Name is required");
       return;
@@ -576,16 +578,16 @@ const Upload = () => {
     const uploadData = {
       name,
       description,
-      image,
+      imageStr,
       tags
     }
 
     console.log("Data Uploaded: ", uploadData);
   }
 
-  function handleFileInputChange(event) {
+  function handleFileInputChange() {
 
-    const file = event.target.files[0];
+    const file = image;
 
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -594,13 +596,10 @@ const Upload = () => {
       const base64String = reader.result.split(",")[1].trim();
       console.log(base64String);
 
-      // formik field update
-      if (formikRef.current) {
-        formikRef.current.setFieldValue('file', base64String);
-      }
-      setFileReady(true);
+      setImageStr(base64String);
     };
     reader.onerror = () => {
+      setError('Error occurred while reading the file.');
       console.error('Error occurred while reading the file.');
     };
   }
