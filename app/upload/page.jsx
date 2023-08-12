@@ -7,7 +7,10 @@ import { RxCross2 } from "react-icons/rx";
 import Web3 from "web3";
 import axios from "axios";
 
-const web3 = new Web3(window.ethereum);
+if(typeof window!== "undefined"){
+  const web3 = new Web3(window.ethereum);
+}
+
 
 var contract = null;
 
