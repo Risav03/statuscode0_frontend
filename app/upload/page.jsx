@@ -45,7 +45,7 @@ const Upload = () => {
   };
 
   async function ipfsbackend(uploadData){
-    let url = "https://972c-103-2-135-35.ngrok.io/api/datasetData/uploadData"
+    let url = "https://49dd-103-2-135-35.ngrok.io/api/datasetData/uploadData"
     console.log("Sending data:", uploadData);
    const response = await axios.post(url, uploadData);
    console.log(response);
@@ -55,7 +55,7 @@ const Upload = () => {
 
   //axios call and after ipfs response do mint
 
-  const mint = async (account, uri) => {
+  const mint = async (account, uri, nftData) => {
     const ADDRESS = "0x1617C0CE2899cD8189dF26a9DF798e8bEbC87ed7";
     const ABI = [
       {
@@ -570,7 +570,25 @@ const Upload = () => {
 
     contract = new web3.eth.Contract(ABI, ADDRESS);
 
-    contract?.methods.safeMint(account, uri).send({from: account, gasPrice: gas}).then((res)=>{console.log(res)}).catch((err)=>{console.log(err)});
+    contract?.methods.safeMint(account, uri).send({from: account, gasPrice: gas})
+    .then((res)=>{
+      console.log(res)
+
+      const uploadData = {
+        img: nftData.data.image,
+        name: nftData.data.metadata[1],
+        description: nftData.data.metadata[3],
+        tags: nftData.data.metadata[5],
+        feature_vector: nftData.data.feature_vector,
+        hash_code: nftData.data.hash_code,
+        mintedBy: account
+      }
+
+      console.log("UpUpUp: ", uploadData);
+
+      ipfsbackend(uploadData);
+    })
+    .catch((err)=>{console.log(err)});
     
   }
 
@@ -578,7 +596,7 @@ const Upload = () => {
 
   useEffect(()=>{
     console.log(account);
-    axios.get("https://54f3-103-2-135-35.ngrok.io/api/datasetData/remaining_data").then((res)=>{
+    axios.get("https://49dd-103-2-135-35.ngrok.io/api/datasetData/remaining_data").then((res)=>{
         console.log(res);
         setFeatureList(res);
     }).catch((err)=>{
@@ -636,7 +654,7 @@ const Upload = () => {
     console.log("imaaaag:", imgLink);
     console.log("meeetaa:", nftMetadata);
 
-mint(account, nftMetadata);
+    mint(account, nftMetadata, res);
 
     // .then((res)=>{
     //   console.log("Is similar:"+ res)})
