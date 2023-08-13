@@ -637,7 +637,9 @@ async function displayNFTs(){
     
     const json = await meta.json();
     const title = json["name"];
-    const image = json["image"].substr(7);
+    const hash = json["image"].substr(39);
+    const image = "https://ipfs.io/ipfs/"+hash;
+    console.log("IMAE FILEEEEEE:", image);
     const description = json["description"];
     var arraytags= json["attributes"][0]["value"];
     arraytags = arraytags.replace(/'/g, '"')
@@ -728,7 +730,7 @@ async function displayNFTs(){
                 
                 {/* <h2 className="text-blue-light font-semibold text-center text-lg mb-5 ">{data?.image}</h2> */}
                 <div className="w-full rounded h-32 bg-blue-mid/40 mb-2 overflow-hidden flex items-center justify-center ">
-                <Image src="https://ipfs.io/ipfs/QmeJPsfXmFC5SXgntk58eqWHYJanXz9hscojCgquYjnTv9" width="175" height="175"></Image>
+                <Image src={data.image} width="175" height="175"></Image>
                 </div>
                 <h2 className="text-blue-mid font-semibold text-lg ">{data?.title}</h2>
                 <h2 className="text-blue-light text-sm mb-5 ">{data?.description}</h2>

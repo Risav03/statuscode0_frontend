@@ -9,7 +9,7 @@ import axios from "axios";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 
 
-  const web3 = new Web3(window.ethereum);
+  const web3 = new Web3(window?.ethereum);
 
 
 

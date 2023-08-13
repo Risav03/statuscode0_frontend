@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   images: {
-    domains: ['ipfs.io'],
+    domains: ["ipfs.io"],
   },
     reactStrictMode: false,
     webpack5: true,
