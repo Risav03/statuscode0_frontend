@@ -13,76 +13,6 @@ var contract = null;
 
 const Marketplace = () => {
 
-  
-  // const [dataArray, setDataArray] = useState([
-  //   {
-  //     id: 1,
-  //     image: "",
-  //     title: "title",
-  //     description: "description",
-  //     tags: ["hello", "hiie", "wow"],
-  //     price: 10
-  //   },
-  //   {
-  //     id: 1,
-  //     image: "",
-  //     title: "title",
-  //     description: "description",
-  //     tags: ["hello", "hoooo", "wow"],
-  //     price: 10
-  //   },
-
-  //   {
-  //     id: 1,
-  //     image: "",
-  //     title: "title",
-  //     description: "description",
-  //     tags: ["hello", "hiie", "wow"],
-  //     price: 10
-  //   },
-  //   {
-  //     id: 1,
-  //     image: "",
-  //     title: "title",
-  //     description: "description",
-  //     tags: ["hello", "hoooo", "wow"],
-  //     price: 10
-  //   },
-  //   {
-  //     id: 1,
-  //     image: "",
-  //     title: "title",
-  //     description: "description",
-  //     tags: ["hello", "hiie", "wow"],
-  //     price: 10
-  //   },
-  //   {
-  //     id: 1,
-  //     image: "",
-  //     title: "title",
-  //     description: "description",
-  //     tags: ["hello", "hiie", "wow"],
-  //     price: 10
-  //   },
-  //   {
-  //     id: 1,
-  //     image: "",
-  //     title: "title",
-  //     description: "description",
-  //     tags: ["hello", "hiie", "wow"],
-  //     price: 10
-  //   },
-  //   {
-  //     id: 1,
-  //     image: "",
-  //     title: "title",
-  //     description: "description",
-  //     tags: ["hello", "hiie", "wow"],
-  //     price: 10
-  //   },
-
-  // ]);
-
   const [dataArray, setDataArray] = useState();
 
   const [newTag, setNewTag] = useState("");
@@ -717,11 +647,11 @@ async function displayNFTs(){
             </div>
             </div>
           
-          <div className="flex flex-row py-5 flex-wrap outline outline-blue-mid h-[600px] overflow-hidden items-start justify-center gap-5 outline-[1px] px-5 text-blue-light text-xl w-[80%] rounded-lg border-blue-mid bg-black/20">
+          <div className="flex flex-row py-5 flex-wrap outline outline-blue-mid h-[600px] overflow-scroll pb-20 items-start justify-center gap-5 outline-[1px] px-5 text-blue-light text-xl w-[80%] rounded-lg border-blue-mid bg-black/20">
             
             
            
-            <div className="flex flex-row flex-wrap gap-4">
+            <div className="flex flex-row flex-wrap gap-4 overflow-scroll justify-start">
             {filterObjectsByTags()?.map((data, index)=>(
               <div key={index} className="border-blue-mid border-[1px] rounded p-3 w-48">
                 {console.log("Hi")}
