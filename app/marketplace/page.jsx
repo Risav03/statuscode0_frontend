@@ -621,17 +621,15 @@ async function displayNFTs(){
   var balance;
   
   if (isConnect){
-    balance = await contract.methods.balanceOf(account)?.call();
+    balance = await contract.methods.totalSupply()?.call();
   }
   console.log("BALANCE", balance);
 
   const tempData = [];
 
   for (let i = 0; i < balance; i++) {
-    const userMintedId = parseInt(
-      await contract.methods.tokenOfOwnerByIndex(account, i)?.call()
-    );
-    const tokenURI = await contract.methods.tokenURI(userMintedId)?.call();
+   
+    const tokenURI = await contract.methods.tokenURI(i)?.call();
     const metadata = `https://ipfs.io/ipfs/${tokenURI.substr(7)}`;
     const meta = await fetch(metadata);
     
@@ -645,7 +643,7 @@ async function displayNFTs(){
     arraytags = arraytags.replace(/'/g, '"')
     var tags = JSON.parse(arraytags);
 
-    tempData.push({ userMintedId, title, description, tags, image });
+    tempData.push({ i, title, description, tags, image });
     
   }
   console.log("TEMPDATA",tempData);
