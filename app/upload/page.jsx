@@ -570,25 +570,25 @@ const Upload = () => {
 
     contract = new web3.eth.Contract(ABI, ADDRESS);
 
-    contract?.methods.safeMint(account, uri).send({from: account, gasPrice: gas})
-    .then((res)=>{
-      console.log(res)
+    contract?.methods.safeMint(account, uri).send({from: account, gasPrice: gas});
+    // .then(()=>{
+      
 
-      const uploadData = {
-        img: nftData.data.image,
-        name: nftData.data.metadata[1],
-        description: nftData.data.metadata[3],
-        tags: nftData.data.metadata[5],
-        feature_vector: nftData.data.feature_vector,
-        hash_code: nftData.data.hash_code,
-        mintedBy: account
-      }
+    //   const uploadData = {
+    //     img: nftData.data.image,
+    //     name: nftData.data.metadata[1],
+    //     description: nftData.data.metadata[3],
+    //     tags: nftData.data.metadata[5],
+    //     feature_vector: nftData.data.feature_vector,
+    //     hash_code: nftData.data.hash_code,
+    //     mintedBy: account
+    //   }
 
-      console.log("UpUpUp: ", uploadData);
+    //   console.log("UpUpUp: ", uploadData);
 
-      ipfsbackend(uploadData);
-    })
-    .catch((err)=>{console.log(err)});
+    //   ipfsbackend(uploadData);
+    // })
+    // .catch((err)=>{console.log(err);});
     
   }
 
