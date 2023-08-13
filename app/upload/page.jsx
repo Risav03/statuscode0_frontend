@@ -56,7 +56,7 @@ const Upload = () => {
   //axios call and after ipfs response do mint
 
   const mint = async (account, uri, nftData) => {
-    const ADDRESS = "0x1617C0CE2899cD8189dF26a9DF798e8bEbC87ed7";
+    const ADDRESS = "0x5B18848c6110Ff29A39340E9e151D44B7ccd911a";
     const ABI = [
       {
         "inputs": [],
